@@ -1,0 +1,32 @@
+function [CQuadVal, GradCQuadVal] = CtsQuad(quad_pts)
+%
+% This function computes the values of the continuous
+% quadratic basis functions, and of its gradient, at
+% the quadrature points quad_pts --- on the reference triangle.
+%
+
+nqpt = size(quad_pts,1) ;
+
+x=quad_pts(:,1);
+y=quad_pts(:,2);
+
+CQuadVal(1,:) = -2*(1 - x - y).*(1/2 - x - y) ;
+CQuadVal(2,:) = 2*x.*(x - 1/2) ;
+CQuadVal(3,:) = 2*y.*(y - 1/2) ;
+CQuadVal(4,:) = 4*x.*y ;
+CQuadVal(5,:) = 4*(1 - x - y).*y ;
+CQuadVal(6,:) = 4*(1 - x - y).*x ;
+
+GradCQuadVal(1,1,:) = -2*(1.0 - x - y)-2*(1/2 - x - y);
+GradCQuadVal(2,1,:) =  2*x+2*(x-1/2) ;
+GradCQuadVal(3,1,:) =  zeros(1,nqpt) ;
+GradCQuadVal(4,1,:) =  4*y ;
+GradCQuadVal(5,1,:) =  -4*y ;
+GradCQuadVal(6,1,:) =  4*(1-x-y)-4*x ;
+
+GradCQuadVal(1,2,:) = 2*(1.0 - x - y)-2*(1/2 - x - y);
+GradCQuadVal(3,2,:) = zeros(1,nqpt) ;
+GradCQuadVal(2,2,:) = 2*y+2*(y-1/2) ;
+GradCQuadVal(4,2,:) = 4*x ;
+GradCQuadVal(5,2,:) = 4*(1-x-y)-4*y ;
+GradCQuadVal(6,2,:) = -4*x ;

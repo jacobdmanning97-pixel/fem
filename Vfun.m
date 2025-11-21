@@ -1,7 +1,7 @@
-function [localmat] = kfun(xy_pts, triag_no) 
+function [localmat] = Vfun(xy_pts, triag_no) 
 %
-% This function computes, the values for Kfun -- the
-% diffusion coefficient
+% This function computes, the values for Vfun -- the
+% velocity function
 % at the requested xy_pts points in triangle triag_no.
 %  The vector of values is returned in localmat.
 %  
@@ -19,11 +19,16 @@ global quad_rul num
 
 %%%%
 npts = size(xy_pts,1) ;
+xpts = xy_pts(:,1) ;
+ypts = xy_pts(:,2) ;
 
-%% localmat is a vector of values
-localmat = 1*ones(1,npts) ;
+localmat = zeros(2, npts) ;
 
-
-
-
-
+%% localmat is a vector of values here the function is [-x , y]
+if num ==1 
+    localmat(1,:) = -xpts.' ;
+    localmat(2,:) = ypts.' ;
+else
+    localmat(1,:) = 3*ones(1,npts) ;
+    localmat(2,:) = 2*ones(1,npts)  ;
+end

@@ -1,7 +1,6 @@
-function [localmat] = kfun(xy_pts, triag_no) 
+function [localmat] = ffun(xy_pts, triag_no) 
 %
-% This function computes, the values for Kfun -- the
-% diffusion coefficient
+% This function computes, the values for ffun 
 % at the requested xy_pts points in triangle triag_no.
 %  The vector of values is returned in localmat.
 %  
@@ -19,9 +18,17 @@ global quad_rul num
 
 %%%%
 npts = size(xy_pts,1) ;
+x = xy_pts(:,1)';
+y = xy_pts(:,2)';
 
 %% localmat is a vector of values
-localmat = 1*ones(1,npts) ;
+%'num' is used to change between the two problems in the homework
+if num == 1
+    localmat = 2*pi*x.*y+10;
+else
+    localmat = 2*(x.*sin(2*pi*x.*y)+x)+3*(sin(2*pi*x.*y)+2*pi*x.*y.*cos(2*pi*x.*y)+1)+4*pi^2*x.*y.^2.*sin(2*pi*x.*y)+ ...
+                4*pi^2*x.^3.*sin(2*pi*x.*y)-4*pi*y.*cos(2*pi*x.*y)+4*pi*x.^2.*cos(2*pi*x.*y);
+end
 
 
 

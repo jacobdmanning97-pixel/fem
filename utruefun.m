@@ -1,8 +1,8 @@
-function [localmat] = kfun(xy_pts, triag_no) 
+function [localmat] = utruefun(xy_pts, triag_no)  
 %
-% This function computes, the values for Kfun -- the
-% diffusion coefficient
-% at the requested xy_pts points in triangle triag_no.
+% This function represents the true solution
+% Dirichlet boundary data
+% at the requested xy_pts points 
 %  The vector of values is returned in localmat.
 %  
 %
@@ -19,11 +19,15 @@ global quad_rul num
 
 %%%%
 npts = size(xy_pts,1) ;
+xpts = xy_pts(:,1) ;
+ypts = xy_pts(:,2) ;
 
 %% localmat is a vector of values
-localmat = 1*ones(1,npts) ;
-
-
+if num == 1
+    localmat = (2* xpts.^2 + pi* xpts.*ypts + 7).' ;
+else
+    localmat = (xpts .*sin(2*pi *xpts .*ypts) + xpts ).' ;
+end
 
 
 

@@ -1,7 +1,7 @@
-function [localmat] = kfun(xy_pts, triag_no) 
+function [localmat] = qfun(xy_pts, triag_no) 
 %
-% This function computes, the values for Kfun -- the
-% diffusion coefficient
+% This function computes, the values for Qfun -- the
+% sink/source coefficient
 % at the requested xy_pts points in triangle triag_no.
 %  The vector of values is returned in localmat.
 %  
@@ -21,7 +21,8 @@ global quad_rul num
 npts = size(xy_pts,1) ;
 
 %% localmat is a vector of values
-localmat = 1*ones(1,npts) ;
+localmat = 2*ones(1,npts) ;
+
 
 
 
